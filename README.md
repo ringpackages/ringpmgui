@@ -50,6 +50,11 @@ Displays installed packages with the following columns:
 - RingQt (for GUI components)
 - RingPM (Ring Package Manager)
 
+## install
+   ```
+   ringpm install ringpmgui
+   ```
+
 ## Usage
 
 1. Run the application:
