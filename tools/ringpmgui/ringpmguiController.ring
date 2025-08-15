@@ -17,7 +17,7 @@ if isMainSourceFile() {
 class ringpmguiController from WindowsControllerParent
 
 	oView = new ringpmguiView
-
+	
 	# Application state
 	aInstalledPackages = []
 	aInstalledPackagesName = []
@@ -99,7 +99,7 @@ class ringpmguiController from WindowsControllerParent
 			txtOutput.append("Executing: ringpm " + cCommand + nl)
 			txtOutput.append("----------------------------------------" + nl)
 		}
-
+		
 		aPara = split(cCommand," ")
 		oCommandList = new qStringlist() {
 			for cPara in aPara
@@ -114,24 +114,28 @@ class ringpmguiController from WindowsControllerParent
 			setReadyReadStandardOutputEvent(Method(:processOutput))
 			setReadyReadStandardErrorEvent(Method(:processError))
 			start_3( QIODevice_ReadWrite )
+			//waitForFinished(5000)
 		}
 
+		oView.txtOutput.append( nl + "Command completed." + nl )
 		
 	# Handle process output
 	func processOutput
 		if oCurrentProcess != NULL
 			cOutput = oCurrentProcess.readAllStandardOutput().data()
-			oView.txtOutput.append(cOutput + nl + "Command completed." + nl + nl)
+			oView.txtOutput.append(cOutput )
+			//see "Output : " ? cOutput
 		ok
 		# Refresh package list after any command that might change packages
 		loadInstalledPackages()
-		oCurrentProcess = NULL
+		
 
 	# Handle process errors
 	func processError
 		if oCurrentProcess != NULL
 			cError = oCurrentProcess.readAllStandardError().data()
 			oView.txtOutput.append("Error: " + cError)
+			//see "Error : "? cError
 		ok
 
 	# Load installed packages from packages directory
@@ -221,6 +225,7 @@ class ringpmguiController from WindowsControllerParent
 
 	# Close application
 	func closeApplication
+		oCurrentProcess = NULL
 		oView.win.close()
 
 	func msgBox cMessageBoxText, cMessageBoxTitle, nLevel
