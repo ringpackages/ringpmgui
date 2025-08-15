@@ -42,7 +42,6 @@ Displays installed packages with the following columns:
 
 - `ringpmguiController.ring` - Main application controller with business logic
 - `ringpmguiView.ring` - GUI layout and visual components
-- `ringpmgui.rform` - Form designer file for the GUI layout
 - `README.md` - This documentation file
 
 ## Requirements
@@ -50,6 +49,11 @@ Displays installed packages with the following columns:
 - Ring Programming Language
 - RingQt (for GUI components)
 - RingPM (Ring Package Manager)
+
+## install
+   ```
+   ringpm install ringpmgui
+   ```
 
 ## Usage
 
