@@ -8,7 +8,7 @@ Load "guilib.ring"
 import System.GUI
 
 if IsMainSourceFile() { 
-	new App {
+	new qApp {
 		StyleFusion()
 		new ringpmguiView { win.show() } 
 		exec()
@@ -20,7 +20,7 @@ class ringpmguiView from WindowsViewParent
 		move(100,5)
 		resize(900,700)
 		setWindowTitle("RingPM GUI - Ring Package Manager")
-		setstylesheet("background-color: #f0f0f0;") 
+		setstylesheet("background-color: #f7eeeeff;") 
 
 		# Package installation section
 		lblPackage = new label(win) {
@@ -46,6 +46,7 @@ class ringpmguiView from WindowsViewParent
 			setstylesheet("background-color: #4CAF50; color: white; border: none; border-radius: 10px; padding: 5px; font-weight: bold; font-size: 14px;")
 			setText("Install")
 			setClickEvent(Method(:installPackage))
+			setFixedWidth(100)
 		}
 		
 		# Installed packages table
@@ -69,10 +70,10 @@ class ringpmguiView from WindowsViewParent
 			
 			setAlternatingRowColors(true)
             horizontalHeader().setStyleSheet("color: blue")
-            verticalHeader().setStyleSheet("color: green")
+            verticalHeader().setStyleSheet("color: red")
 			# Table selection
 			setItemSelectionChangedEvent(Method(:packageSelected))
-			
+			setitemDoubleClickedEvent(Method(:runPackage))
 			# Set column widths
 			setColumnWidth(1, 200)
 			setColumnWidth(2, 500)
@@ -90,6 +91,7 @@ class ringpmguiView from WindowsViewParent
 			setText("Run")
 			setEnabled(false)
 			setClickEvent(Method(:runPackage))
+			setFixedWidth(100)
 		}
 		
 		btnUpdate = new pushbutton(win) {
@@ -99,6 +101,7 @@ class ringpmguiView from WindowsViewParent
 			setText("Update")
 			setEnabled(false)
 			setClickEvent(Method(:updatePackage))
+			setFixedWidth(100)
 		}
 		
 		btnRemove = new pushbutton(win) {
@@ -108,14 +111,16 @@ class ringpmguiView from WindowsViewParent
 			setText("Remove")
 			setEnabled(false)
 			setClickEvent(Method(:removePackage))
+			setFixedWidth(100)
 		}
-		
+
 		btnClose = new pushbutton(win) {
 			move(780,430)
 			resize(100,35)
-			setstylesheet("background-color: #9E9E9E; color: white; border-radius: 10px; border: none; padding: 5px; font-weight: bold; font-size: 14px;")
+			setstylesheet("background-color: #b3b1b2ff; color: white; border-radius: 10px; border: none; padding: 5px; font-weight: bold; font-size: 14px;")
 			setText("Close")
 			setClickEvent(Method(:closeApplication))
+			setFixedWidth(100)
 		}
 		
 		# Output section
@@ -149,6 +154,7 @@ class ringpmguiView from WindowsViewParent
 			AddWidget(btnRun)
 			AddWidget(btnUpdate)
 			AddWidget(btnRemove)
+			AddWidget(btnBrowse)
 			AddWidget(btnClose)
 		}
 

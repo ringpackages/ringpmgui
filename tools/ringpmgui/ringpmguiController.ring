@@ -72,12 +72,11 @@ class ringpmguiController from WindowsControllerParent
 		if nResult = 1  # Yes button
 			executeRingPMCommand("remove " + cPackageName)
 		ok
-	
+
 	# Get the name of the currently selected package
 	func getSelectedPackageName
 		oView {
 			nCurrentRow = tblPackages.currentRow()-1
-			? nCurrentRow
 			if nCurrentRow >= 0 and nCurrentRow < len(this.aInstalledPackagesName)
 				return this.aInstalledPackagesName[nCurrentRow+1]
 			ok
@@ -168,6 +167,7 @@ class ringpmguiController from WindowsControllerParent
 		
 		try
 			cPackageName = split(cPackageFile, "/")[4]
+			//cPackagePath = substr(cPackageFile, 1, len(cPackageFile) - 13)
 			aInstalledPackagesName + cPackageName
 
 			cContent = read(cPackageFile)
@@ -227,10 +227,8 @@ class ringpmguiController from WindowsControllerParent
 		oMessageBox = new qmessagebox(oView.win) 
         oMessageBox.setwindowtitle(cMessageBoxTitle)
         oMessageBox.settext(cMessageBoxText )
-        oMessageBox.setstylesheet("background-color : white")
         if nLevel = 0 oMessageBox.show() ok
         if nLevel = 1
-			//oMessageBox.setInformativeText("Do you want to save your changes?")
             oMessageBox.setstandardbuttons(QMessageBox_Yes | QMessageBox_No)
             result = oMessageBox.exec()  
 			if result = QMessageBox_Yes
