@@ -154,7 +154,6 @@ class ringpmguiView from WindowsViewParent
 			AddWidget(btnRun)
 			AddWidget(btnUpdate)
 			AddWidget(btnRemove)
-			AddWidget(btnBrowse)
 			AddWidget(btnClose)
 		}
 
