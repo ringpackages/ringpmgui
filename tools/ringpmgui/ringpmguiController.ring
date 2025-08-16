@@ -28,10 +28,11 @@ class ringpmguiController from WindowsControllerParent
 
 	# Load installed packages
 	loadInstalledPackages()
-
-	mycompleter = new qCompleter3(mylist,oView.win)
-	mycompleter.setCaseSensitivity(Qt_CaseInsensitive)
-	oView.txtPackageName.setCompleter(mycompleter)
+	
+	func completer
+		mycompleter = new qCompleter3(mylist,oView.win)
+		mycompleter.setCaseSensitivity(Qt_CaseInsensitive)
+		oView.txtPackageName.setCompleter(mycompleter)
 
 	# Search if package exist
 	func Search
@@ -141,16 +142,24 @@ class ringpmguiController from WindowsControllerParent
 			setReadyReadStandardErrorEvent(Method(:processError))
 			start_3( QIODevice_ReadWrite )
 		}
-
+	
 	# Handle process output
 	func processOutput
 		if oCurrentProcess != NULL
 			cOutput = oCurrentProcess.readAllStandardOutput().data()
 			oView.txtOutput.append(cOutput )
 		ok
+		
+		oCursor = oView.txtOutput.textcursor()
+		nPos = max(len(oView.txtOutput.toplaintext())-1,0)
+		oCursor.setPosition(nPos,QTextCursor_KeepAnchor)
+		oCursor.setPosition(nPos,QTextCursor_MoveAnchor)
+		oView.txtOutput.setTextCursor(oCursor)
+		
 		# Refresh package list after any command that might change packages
 		loadInstalledPackages()
-		//oView.txtOutput.append( nl + "Command completed." + nl )
+		
+		
 
 	# Handle process errors
 	func processError
@@ -179,8 +188,10 @@ class ringpmguiController from WindowsControllerParent
 					ok
 				ok
 			next
+			
 			# Update the table
 			updatePackageTable()
+			completer()
 		catch
 			showMessage("Error loading package information.")
 		done
@@ -211,7 +222,7 @@ class ringpmguiController from WindowsControllerParent
 		oView {
 			# Clear existing rows
 			tblPackages.setRowCount(0)
-
+			
 			# Add packages to table
 			for i = 1 to len(this.aInstalledPackages)
 				aPackage = this.aInstalledPackages[i]

@@ -55,14 +55,14 @@ Displays installed packages with the following columns:
 
 ## install
    ```
-   ringpm install ringpmgui
+   ringpm install ringpmgui from azzeddine2017
    ```
 
 ## Usage
 
 1. Run the application:
    ```
-   ring ringpmguiController.ring
+   ringpm run ringpmgui
    ```
 
 2. **To install a package**:
