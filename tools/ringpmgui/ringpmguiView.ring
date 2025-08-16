@@ -21,6 +21,7 @@ class ringpmguiView from WindowsViewParent
 		resize(900,700)
 		setWindowTitle("RingPM GUI - Ring Package Manager")
 		setstylesheet("background-color: #fcf8f8ff;") 
+		setWinIcon(win,"images/ringpmgui.png") 
 
 		# Package installation section
 		lblPackage = new label(win) {

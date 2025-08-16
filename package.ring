@@ -5,17 +5,17 @@ aPackageInfo = [
 	:developer = "Azzeddine Remmal",
 	:email = "azzeddine.remmal@gmail.com",
 	:license = "MIT License",
-	:version = "1.0.3",
+	:version = "1.0.4",
 	:ringversion = "1.23",
 	:versions = 	[
 		[
-			:version = "1.0.3",
+			:version = "1.0.4",
 			:branch = "master"
 		]
 	],
 	:libs = 	[
 		[
-			:name = "stdlib",
+			:name = "stdlibcore",
 			:version = "1.0",
 			:providerusername = ""
 		],
@@ -30,6 +30,7 @@ aPackageInfo = [
 		"README.md"
 	],
 	:ringfolderfiles = 	[
+		"tools/ringpmgui/images/ringpmgui.png",
 		"tools/ringpmgui/README.md",
 		"tools/ringpmgui/ringpmguiController.ring",
 		"tools/ringpmgui/ringpmguiView.ring"

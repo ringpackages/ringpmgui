@@ -17,7 +17,7 @@ if isMainSourceFile() {
 class ringpmguiController from WindowsControllerParent
 
 	oView = new ringpmguiView
-	
+	SysSet("CUILIB_COLORS", 0) 
 	# Application state
 	aInstalledPackages = []
 	oCurrentProcess = NULL
@@ -51,11 +51,12 @@ class ringpmguiController from WindowsControllerParent
 			showMessage("Please enter a package name to install.")
 			return
 		ok
+
+		executeRingPMCommand("refresh")
+
 		if cPackageName != ""
-			executeRingPMCommand("refresh")
 			executeRingPMCommand("install " + cPackageName)
 		elseif cPackageName != "" and cUserName != ""
-			executeRingPMCommand("refresh")
 			executeRingPMCommand("install " + cPackageName + " from " + cUserName)
 		ok
 
@@ -243,6 +244,7 @@ class ringpmguiController from WindowsControllerParent
 	# Close application
 	func closeApplication
 		oCurrentProcess = NULL
+		SysSet("CUILIB_COLORS", 1) 
 		oView.win.close()
 
 	func msgBox cMessageBoxText, cMessageBoxTitle, nLevel
