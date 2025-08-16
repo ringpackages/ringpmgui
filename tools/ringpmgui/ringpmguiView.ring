@@ -1,6 +1,6 @@
 # Form/Window View - RingPM GUI
 # Generated for Ring Package Manager GUI
-# Date : 2025.01.14
+# Date : 2025.08.16
 
 Load "stdlibcore.ring"
 Load "guilib.ring"
@@ -20,7 +20,7 @@ class ringpmguiView from WindowsViewParent
 		move(100,5)
 		resize(900,700)
 		setWindowTitle("RingPM GUI - Ring Package Manager")
-		setstylesheet("background-color: #f7eeeeff;") 
+		setstylesheet("background-color: #fcf8f8ff;") 
 
 		# Package installation section
 		lblPackage = new label(win) {
@@ -33,13 +33,31 @@ class ringpmguiView from WindowsViewParent
 		
 		txtPackageName = new lineedit(win) {
 			move(110,20)
-			resize(600,30)
+			resize(200,30)
 			setstylesheet("color: black; background-color: white; border: 1px solid #ccc; padding: 5px;")
 			setPlaceholderText("Enter package name to install...")
 			# Package name textbox - Enter key
 			setReturnPressedEvent(Method(:installPackage))
+			setTextChangedEvent(Method(:Search))
 		}
 		
+		lblFrom = new label(win) {
+			move(305,20)
+			resize(80,30)
+			setstylesheet("color: black; font-weight: bold;")
+			setText("From:")
+			setAlignment(Qt_AlignLeft | Qt_AlignVCenter)
+		}
+
+		txtUserName = new lineedit(win) {
+			move(390,20)
+			resize(200,30)
+			setstylesheet("color: black; background-color: white; border: 1px solid #ccc; padding: 5px;")
+			setPlaceholderText("Enter developer Github user name .")
+			# Package name textbox - Enter key
+			setReturnPressedEvent(Method(:installPackage))
+		}
+
 		btnInstall = new pushbutton(win) {
 			move(720,20)
 			resize(100,30)
@@ -69,8 +87,8 @@ class ringpmguiView from WindowsViewParent
             setHorizontalHeaderItem(3, new QTableWidgetItem("Package Version"))
 			
 			setAlternatingRowColors(true)
-            horizontalHeader().setStyleSheet("color: blue")
-            verticalHeader().setStyleSheet("color: red")
+            horizontalHeader().setStyleSheet("background-color: #51930a; color: #fcf8f8ff; font-weight: bold; font-size: 14px;")
+            verticalHeader().setStyleSheet(" color: #f44336; font-weight: bold; font-size: 11px;" )
 			# Table selection
 			setItemSelectionChangedEvent(Method(:packageSelected))
 			setitemDoubleClickedEvent(Method(:runPackage))
@@ -117,7 +135,7 @@ class ringpmguiView from WindowsViewParent
 		btnClose = new pushbutton(win) {
 			move(780,430)
 			resize(100,35)
-			setstylesheet("background-color: #b3b1b2ff; color: white; border-radius: 10px; border: none; padding: 5px; font-weight: bold; font-size: 14px;")
+			setstylesheet("background-color: #8f8e8e; color: white; border-radius: 10px; border: none; padding: 5px; font-weight: bold; font-size: 14px;")
 			setText("Close")
 			setClickEvent(Method(:closeApplication))
 			setFixedWidth(100)
@@ -137,12 +155,15 @@ class ringpmguiView from WindowsViewParent
 			resize(860,150)
 			setstylesheet("background-color: #2b2b2b; color: #ffffff; border: 1px solid #ccc; font-family: 'Courier New', monospace; font-size: 14px;")
 			setReadOnly(true)
-			setText("Welcome to RingPM GUI" + nl + "Ready to manage Ring packages..." + nl + nl)
+			setText("Welcome to RingPM GUI" + nl + "Ready to manage Ring packages..." + nl )
+			
 		}
 
 		Layout1 = new QHBoxLayout() {
 			AddWidget(lblPackage)
 			AddWidget(txtPackageName)
+			AddWidget(lblFrom)
+			AddWidget(txtUserName)
 			AddWidget(btnInstall)
 		}
 

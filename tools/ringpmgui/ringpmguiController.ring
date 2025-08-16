@@ -1,6 +1,6 @@
 # Application : RingPM GUI
 # Author      : Ring Community
-# Date        : 2025.01.14
+# Date        : 2025.08.16
 # Description : GUI interface for Ring Package Manager
 
 load "ringpmguiView.ring"
@@ -20,23 +20,45 @@ class ringpmguiController from WindowsControllerParent
 	
 	# Application state
 	aInstalledPackages = []
-	aInstalledPackagesName = []
 	oCurrentProcess = NULL
 	
 	cPackagesPath = "../ringpm/packages"
 
 	# Load installed packages
 	loadInstalledPackages()
-		
+
+
+
+	# Search if package exist
+	func Search
+		oView {
+			cStrSearch =  txtPackageName.Text()
+			if len(cStrSearch) > 3
+				for index = 1 to len(this.aInstalledPackages)
+					if 	this.aInstalledPackages[index][:folder] = cStrSearch 
+						tblPackages.setcurrentcell( index , 1)
+					ok
+				next
+			ok
+		}
+	
 	# Install a package
 	func installPackage
 		cPackageName = trim(oView.txtPackageName.text())
+		cUserName = trim(oView.txtUserName.text())
+
 		if cPackageName = ""
 			showMessage("Please enter a package name to install.")
 			return
 		ok
-		
-		executeRingPMCommand("install " + cPackageName)
+		if cPackageName != ""
+			executeRingPMCommand("refresh")
+			executeRingPMCommand("install " + cPackageName)
+		elseif cPackageName != "" and cUserName != ""
+			executeRingPMCommand("refresh")
+			executeRingPMCommand("install " + cPackageName + " from " + cUserName)
+		ok
+
 	
 	# Run selected package
 	func runPackage
@@ -77,8 +99,8 @@ class ringpmguiController from WindowsControllerParent
 	func getSelectedPackageName
 		oView {
 			nCurrentRow = tblPackages.currentRow()-1
-			if nCurrentRow >= 0 and nCurrentRow < len(this.aInstalledPackagesName)
-				return this.aInstalledPackagesName[nCurrentRow+1]
+			if nCurrentRow >= 0 and nCurrentRow < len(this.aInstalledPackages)
+				return this.aInstalledPackages[nCurrentRow+1][:folder]
 			ok
 		}
 		return ""
@@ -117,25 +139,24 @@ class ringpmguiController from WindowsControllerParent
 			//waitForFinished(5000)
 		}
 
-		oView.txtOutput.append( nl + "Command completed." + nl )
 		
+		
+
 	# Handle process output
 	func processOutput
 		if oCurrentProcess != NULL
 			cOutput = oCurrentProcess.readAllStandardOutput().data()
 			oView.txtOutput.append(cOutput )
-			//see "Output : " ? cOutput
 		ok
 		# Refresh package list after any command that might change packages
 		loadInstalledPackages()
-		
+		//oView.txtOutput.append( nl + "Command completed." + nl )
 
 	# Handle process errors
 	func processError
 		if oCurrentProcess != NULL
 			cError = oCurrentProcess.readAllStandardError().data()
 			oView.txtOutput.append("Error: " + cError)
-			//see "Error : "? cError
 		ok
 
 	# Load installed packages from packages directory
@@ -158,22 +179,19 @@ class ringpmguiController from WindowsControllerParent
 					ok
 				ok
 			next
+			# Update the table
+			updatePackageTable()
 		catch
 			showMessage("Error loading package information.")
 		done
 
-		# Update the table
-		updatePackageTable()
+		
 
 	# Get package information from package.ring file
 	func getPackageInfo cPackageFile
 		aPackageInfo = []
 		
 		try
-			cPackageName = split(cPackageFile, "/")[4]
-			//cPackagePath = substr(cPackageFile, 1, len(cPackageFile) - 13)
-			aInstalledPackagesName + cPackageName
-
 			cContent = read(cPackageFile)
 			eval(cContent)
 
@@ -197,12 +215,11 @@ class ringpmguiController from WindowsControllerParent
 			# Add packages to table
 			for i = 1 to len(this.aInstalledPackages)
 				aPackage = this.aInstalledPackages[i]
-
 				# Add row
 				tblPackages.setRowCount(i)
 
 				# Set package name
-				tblPackages.setItem(i, 1, new QTableWidgetItem(aPackage[:name]))
+				tblPackages.setItem(i, 1, new QTableWidgetItem(aPackage[:folder]))
 				
 				# Set package description
 				tblPackages.setItem(i, 2, new QTableWidgetItem(aPackage[:description]))

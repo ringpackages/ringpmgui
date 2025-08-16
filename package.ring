@@ -3,13 +3,13 @@ aPackageInfo = [
 	:description = "Our ringpmgui package using the Ring programming language",
 	:folder = "ringpmgui",
 	:developer = "Azzeddine Remmal",
-	:email = "",
+	:email = "azzeddine.remmal@gmail.com",
 	:license = "MIT License",
-	:version = "1.0.2",
+	:version = "1.0.3",
 	:ringversion = "1.23",
 	:versions = 	[
 		[
-			:version = "1.0.2",
+			:version = "1.0.3",
 			:branch = "master"
 		]
 	],
