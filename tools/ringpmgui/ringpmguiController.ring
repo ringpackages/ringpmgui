@@ -17,17 +17,21 @@ if isMainSourceFile() {
 class ringpmguiController from WindowsControllerParent
 
 	oView = new ringpmguiView
+
 	SysSet("CUILIB_COLORS", "0") 
+
 	# Application state
 	aInstalledPackages = []
 	oCurrentProcess = NULL
-	
+	mylist = new qStringList()
 	cPackagesPath = "../ringpm/packages"
 
 	# Load installed packages
 	loadInstalledPackages()
 
-
+	mycompleter = new qCompleter3(mylist,oView.win)
+	mycompleter.setCaseSensitivity(Qt_CaseInsensitive)
+	oView.txtPackageName.setCompleter(mycompleter)
 
 	# Search if package exist
 	func Search
@@ -60,7 +64,6 @@ class ringpmguiController from WindowsControllerParent
 			executeRingPMCommand("install " + cPackageName + " from " + cUserName)
 		ok
 
-	
 	# Run selected package
 	func runPackage
 		cPackageName = getSelectedPackageName()
@@ -137,11 +140,7 @@ class ringpmguiController from WindowsControllerParent
 			setReadyReadStandardOutputEvent(Method(:processOutput))
 			setReadyReadStandardErrorEvent(Method(:processError))
 			start_3( QIODevice_ReadWrite )
-			//waitForFinished(5000)
 		}
-
-		
-		
 
 	# Handle process output
 	func processOutput
@@ -163,7 +162,7 @@ class ringpmguiController from WindowsControllerParent
 	# Load installed packages from packages directory
 	func loadInstalledPackages
 		aInstalledPackages = []
-
+		mylist.clear()
 		try
 			# Get all package.ring files in packages directory
 			aFiles = []
@@ -216,6 +215,8 @@ class ringpmguiController from WindowsControllerParent
 			# Add packages to table
 			for i = 1 to len(this.aInstalledPackages)
 				aPackage = this.aInstalledPackages[i]
+				this.mylist.Append(aPackage[:folder])
+
 				# Add row
 				tblPackages.setRowCount(i)
 

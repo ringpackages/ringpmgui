@@ -95,8 +95,8 @@ class ringpmguiView from WindowsViewParent
 			setitemDoubleClickedEvent(Method(:runPackage))
 			# Set column widths
 			setColumnWidth(1, 200)
-			setColumnWidth(2, 500)
-			setColumnWidth(3, 150)
+			setColumnWidth(2, 450)
+			setColumnWidth(3, 100)
 			
 			# Make table read-only
 			setEditTriggers(QAbstractItemView_NoEditTriggers)
