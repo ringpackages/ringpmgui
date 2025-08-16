@@ -11,7 +11,8 @@ A graphical user interface for the Ring Package Manager (RingPM) built with Ring
 - **User-friendly Interface**: Clean and intuitive GUI design
   
 
-<img width="903" height="725" alt="Capture" src="https://github.com/user-attachments/assets/72a68e61-7371-442a-a366-b9f1b375dc13" />
+<img width="896" height="720" alt="Capture" src="https://github.com/user-attachments/assets/6e666347-54ce-47b8-b9d0-8db28ac4f18a" />
+
 
 
 ## Interface Components
