@@ -61,7 +61,9 @@ class ringpmguiController from WindowsControllerParent
 
 		if cPackageName != ""
 			executeRingPMCommand("install " + cPackageName)
-		elseif cPackageName != "" and cUserName != ""
+		ok
+
+		if cPackageName != "" and cUserName != ""
 			executeRingPMCommand("install " + cPackageName + " from " + cUserName)
 		ok
 
@@ -148,10 +150,11 @@ class ringpmguiController from WindowsControllerParent
 		if oCurrentProcess != NULL
 			cOutput = oCurrentProcess.readAllStandardOutput().data()
 			oView.txtOutput.append(cOutput )
+
 		ok
 		
 		oCursor = oView.txtOutput.textcursor()
-		nPos = max(len(oView.txtOutput.toplaintext())-1,0)
+		nPos = max(len(oView.txtOutput.toplaintext()),0)
 		oCursor.setPosition(nPos,QTextCursor_KeepAnchor)
 		oCursor.setPosition(nPos,QTextCursor_MoveAnchor)
 		oView.txtOutput.setTextCursor(oCursor)

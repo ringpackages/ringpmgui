@@ -55,8 +55,6 @@ class ringpmguiView from WindowsViewParent
 			resize(200,30)
 			setstylesheet("color: black; background-color: white; border: 1px solid #ccc; padding: 5px;")
 			setPlaceholderText("Enter developer Github user name .")
-			# Package name textbox - Enter key
-			setReturnPressedEvent(Method(:installPackage))
 		}
 
 		btnInstall = new pushbutton(win) {
