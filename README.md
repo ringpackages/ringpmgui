@@ -9,12 +9,14 @@ A graphical user interface for the Ring Package Manager (RingPM) built with Ring
 - **Package Operations**: Run, update, and remove installed packages
 - **Real-time Output**: View command output and progress in real-time
 - **User-friendly Interface**: Clean and intuitive GUI design
+  
 <img width="812" height="654" alt="Sketch" src="https://github.com/user-attachments/assets/00c5f8c3-2e65-46fd-87a1-707b6d842a48" />
 
 ## Interface Components
 
 ### Package Installation
 - **Package Name Textbox**: Enter the name of the package to install
+- **User Name Textbox**: Enter developer Github user name 
 - **Install Button**: Click to install the specified package
 
 ### Installed Packages Table
