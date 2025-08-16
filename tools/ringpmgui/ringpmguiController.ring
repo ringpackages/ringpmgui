@@ -17,7 +17,7 @@ if isMainSourceFile() {
 class ringpmguiController from WindowsControllerParent
 
 	oView = new ringpmguiView
-	SysSet("CUILIB_COLORS", 0) 
+	SysSet("CUILIB_COLORS", "0") 
 	# Application state
 	aInstalledPackages = []
 	oCurrentProcess = NULL
@@ -244,7 +244,7 @@ class ringpmguiController from WindowsControllerParent
 	# Close application
 	func closeApplication
 		oCurrentProcess = NULL
-		SysSet("CUILIB_COLORS", 1) 
+		SysSet("CUILIB_COLORS", "1") 
 		oView.win.close()
 
 	func msgBox cMessageBoxText, cMessageBoxTitle, nLevel
