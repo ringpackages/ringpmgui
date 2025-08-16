@@ -18,12 +18,16 @@ class ringpmguiController from WindowsControllerParent
 
 	oView = new ringpmguiView
 
+  oView.tblPackages.setSelectionMode(QAbstractItemView_SingleSelection)
+
 	SysSet("CUILIB_COLORS", "0") 
 
-	# Application state
 	aInstalledPackages = []
+
 	oCurrentProcess = NULL
+
 	mylist = new qStringList()
+	
 	cPackagesPath = "../ringpm/packages"
 
 	# Load installed packages

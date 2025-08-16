@@ -37,8 +37,6 @@ class ringpmguiView from WindowsViewParent
 			resize(200,30)
 			setstylesheet("color: black; background-color: white; border: 1px solid #ccc; padding: 5px;")
 			setPlaceholderText("Enter package name to install...")
-			# Package name textbox - Enter key
-			setReturnPressedEvent(Method(:installPackage))
 			setTextChangedEvent(Method(:Search))
 		}
 		

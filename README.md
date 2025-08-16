@@ -68,7 +68,6 @@ Displays installed packages with the following columns:
 
 2. **To install a package**:
    - Enter the package name in the textbox
-   - Click "Install" or press Enter
 
 3. **To manage installed packages**:
    - Select a package from the table
