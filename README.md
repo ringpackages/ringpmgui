@@ -10,7 +10,8 @@ A graphical user interface for the Ring Package Manager (RingPM) built with Ring
 - **Real-time Output**: View command output and progress in real-time
 - **User-friendly Interface**: Clean and intuitive GUI design
   
-<img width="812" height="654" alt="Sketch" src="https://github.com/user-attachments/assets/00c5f8c3-2e65-46fd-87a1-707b6d842a48" />
+<img width="899" height="726" alt="image" src="https://github.com/user-attachments/assets/9d42cd7d-43ff-4e1b-aadc-e4c1b007924f" />
+
 
 ## Interface Components
 
