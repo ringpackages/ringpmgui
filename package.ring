@@ -5,11 +5,11 @@ aPackageInfo = [
 	:developer = "Azzeddine Remmal",
 	:email = "azzeddine.remmal@gmail.com",
 	:license = "MIT License",
-	:version = "1.0.8",
+	:version = "1.0.9",
 	:ringversion = "1.23",
 	:versions = 	[
 		[
-			:version = "1.0.8",
+			:version = "1.0.9",
 			:branch = "master"
 		]
 	],
@@ -21,6 +21,11 @@ aPackageInfo = [
 		],
 		[
 			:name = "ringqt",
+			:version = "1.0",
+			:providerusername = ""
+		],
+		[
+			:name = "tokenslib",
 			:version = "1.0",
 			:providerusername = ""
 		]
